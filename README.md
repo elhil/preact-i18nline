@@ -1,4 +1,5 @@
 # preact-i18nliner
+#### i18n made simple - for Preact!
 
 [![npm](https://img.shields.io/npm/v/preact-i18nliner.svg)](https://npmjs.com/package/preact-i18nliner)
 [![license](https://img.shields.io/npm/l/preact-i18nliner.svg)](https://github.com/download/preact-i18nliner/LICENSE)
