@@ -28,7 +28,8 @@ var translatableAttributes = {
   "value":       function(node) {
                    if (node.name.name !== "input")
                      return false;
-                   var type = findAttribute("type", false, node).toLowerCase();
+                   var type = findAttribute("type", node, false);
+                   type = type && type.toLowerCase();
                    return type === "button" || type === "reset";
                  }
 };
@@ -60,6 +61,9 @@ var hasLiteralContent = function(node) {
 };
 
 var hasNonJSXDescendants = function(node) {
+  if (log) {
+    log.debug(log.name + ': hasNonJSXDescendants', node);
+  }
   switch (node.type){
     case "JSXElement":
       return node.children && node.children.some(hasNonJSXDescendants);
@@ -85,15 +89,25 @@ var findNestedJSXExpressions = function(node, expressions) {
 };
 
 var findAttributeIndex = function(name, array) {
+  if (log) {
+    log.debug(log.name + ': findAttributeIndex', name, array);
+  }
   return findIndex(function(attribute) {
     return attribute.name && attribute.name.name === name;
   }, array);
 };
 
 var findAttribute = function(attribute, node, shouldSpliceFn) {
-  if (node.type !== "JSXElement") return;
+  if (log) {
+    log.debug(log.name + ': findAttribute', attribute, node, shouldSpliceFn);
+  }
 
-  var attributes = node.openingElement.attributes;
+  if (node.type !== "JSXElement" && node.type !== "JSXOpeningElement") return;
+
+  var attributes = node.type === "JSXElement"
+    ? node.openingElement.attributes
+    : node.attributes;
+
   var index = findAttributeIndex(attribute, attributes);
   if (index < 0) return;
 
@@ -152,6 +166,10 @@ function transformationsFor(config) {
   };
 
   var componentInterpolatorFor = function(string, wrappers, placeholders, children, loc) {
+    if (log) {
+      log.debug(log.name + ': componentInterpolatorFor', string, wrappers, placeholders, children, loc);
+    }
+
     var properties = [];
     var key;
     properties.push(
@@ -290,6 +308,10 @@ function transformationsFor(config) {
   };
 
   var translateStringFor = function(node, wrappers, placeholders, newChildren) {
+    if (log) {
+      log.debug(log.name + ': translateStringFor', node, wrappers, placeholders, newChildren);
+    }
+
     var string = "";
     var standalones = newChildren;
     var lastPartType = "wrapper";
@@ -333,6 +355,10 @@ function transformationsFor(config) {
   };
 
   var translateExpressionFor = function(node) {
+    if (log) {
+      log.debug(log.name + ': translateExpressionFor', node);
+    }
+
     var wrappers = {};
     var placeholders = {};
     var children = [];
@@ -348,6 +374,10 @@ function transformationsFor(config) {
 
   return {
     visitJSXElement: function(path) {
+      if (log) {
+        log.debug(log.name + ': visitJSXElement', path);
+      }
+
       var node = path.value;
       var shouldTranslate = isTranslatable(node) && !isTranslating;
       setIsTranslating(shouldTranslate || isTranslating, function() {

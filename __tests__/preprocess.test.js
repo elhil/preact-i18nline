@@ -134,6 +134,18 @@ describe('preprocess', function() {
     expect(subject('<div translate="yes"><b>{num}</b><i>%</i>, or approximately <i>$</i>{money}</div>'))
           .to.equal('<div><I18n.ComponentInterpolator string={I18n.t("%{num}*%*, or approximately **$**%{money}", { "num": "%{num}", "money": "%{money}" })} wrappers={{ "*": <i>$1</i>, "**": <i>$1</i> }} num={<b>{num}</b>} money={money}>$1</I18n.ComponentInterpolator></div>');
   });
+
+  it('Translates the `value` attribute of input elements with `type` = "button" or "reset"', function() {
+    expect(subject('<input translate="yes" type="button" value="Your name" />'))
+          .to.equal('<input type="button" value={I18n.t("Your name")} />');
+    expect(subject('<input translate="yes" type="reset" value="Your name" />'))
+          .to.equal('<input type="reset" value={I18n.t("Your name")} />');
+  });
+
+  it('Ignores the `value` attribute of input elements that have no `type` attribute', function() {
+    expect(subject('<input translate="yes" value="Your name" />'))
+          .to.equal('<input value="Your name" />');
+  });
 });
 
 log.log('Initialized ' + log.name);
