@@ -1,7 +1,7 @@
 {
   "name": "preact-i18nliner",
   "version": "0.1.0",
-  "description": "i18n made simple",
+  "description": "i18n made simple - for Preact!",
   "main": "main.js",
   "scripts": {
     "test": "eslint . && mocha --compilers js:babel-core/register **/*.test.js",
@@ -20,7 +20,22 @@
       "website": "https://github.com/jenseng"
     }
   ],
+  "keywords": [
+    "preact",
+    "i18n",
+    "i18nliner"
+  ],
+  "copyright": "Copyright 2016 by [Stijn de Witt](http://StijnDeWitt.com) and [Jon Jensen](https://github.com/jenseng).",
   "license": "MIT",
+  "licenseUrl": "https://github.com/download/preact-i18nliner/LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/download/preact-i18nliner.git"
+  },
+  "bugs": {
+    "url": "https://github.com/download/preact-i18nliner/issues"
+  },
+  "homepage": "http://github.com/download/preact-i18nliner",  
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-plugin-transform-react-jsx": "^6.8.0",

@@ -1,6 +1,11 @@
 # preact-i18nliner
 
-[<img src="https://travis-ci.org/Download/preact-i18nliner.svg" />](http://travis-ci.org/Download/preact-i18nliner)
+[![npm](https://img.shields.io/npm/v/preact-i18nliner.svg)](https://npmjs.com/package/preact-i18nliner)
+[![license](https://img.shields.io/npm/l/preact-i18nliner.svg)](https://github.com/download/preact-i18nliner/LICENSE)
+[![travis](https://img.shields.io/travis/Download/preact-i18nliner.svg)](https://travis-ci.org/Download/preact-i18nliner)
+[![greenkeeper](https://img.shields.io/david/download/preact-i18nliner.svg)](https://greenkeeper.io/)
+![mind BLOWN](https://img.shields.io/badge/mind-BLOWN-ff69b4.svg)
+
 
 preact-i18nliner brings [I18nliner](https://github.com/jenseng/i18nliner-js)
 to [Preact](https://preactjs.com/) via the [html `translate` attribute](http://www.w3.org/International/questions/qa-translate-flag). I18n doesn't get any easier than this.
