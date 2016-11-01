@@ -1,21 +1,28 @@
+var log = require('ulog')('preact-i18nliner:test:ComponentInterpolator');
+
+var expect = require('chai').expect;
 var subjector = require('../test_utils/subjector');
 var Subject = subjector(__dirname + '/../ComponentInterpolator');
-var React = require('react');
-var ReactDOM = require('react-dom');
+
+var render = require('preact-render-to-string');
+var h = require('preact').h; // eslint-disable-line no-unused-vars
 
 var removeNoise = function(string) {
-  return string.replace(/<!--.*?-->/g, '')
-               .replace(/ data-reactid=".*?"/g, '');
+  return string.replace(/^<span>/, '')
+               .replace(/<\/span>/, '');
 };
 
 describe('ComponentInterpolator', function() {
+
   it('renders', function() {
     var subject = Subject({
       string: 'Hello World',
       wrappers: {}
     }, ["$1"]);
-    expect(subject.isMounted()).toEqual(true);
-    expect(ReactDOM.findDOMNode(subject).textContent).toEqual('Hello World');
+    log.debug(log.name + ': subject=', subject);
+    var rendered = removeNoise(render(subject));
+    log.log(log.name + ': rendered=', rendered);
+    expect(rendered).to.equal('Hello World');
   });
 
   it('escapes html in the string', function() {
@@ -23,7 +30,10 @@ describe('ComponentInterpolator', function() {
       string: 'My favorite tag is <script />',
       wrappers: {}
     }, ["$1"]);
-    expect(ReactDOM.findDOMNode(subject).textContent).toEqual('My favorite tag is <script />');
+    log.debug(log.name + ': subject=', subject);
+    var rendered = removeNoise(render(subject));
+    log.log(log.name + ': rendered=', rendered);
+    expect(rendered).to.equal('My favorite tag is &lt;script /&gt;');
   });
 
   it('interpolates wrapper components', function() {
@@ -35,10 +45,14 @@ describe('ComponentInterpolator', function() {
         '***': <b><em>$1</em></b>
       }
     }, [<hr />, "$1"]);
-    expect(removeNoise(ReactDOM.findDOMNode(subject).innerHTML)).toEqual(
+    log.debug(log.name + ': subject=', subject);
+    var rendered = removeNoise(render(subject));
+    log.log(log.name + ': rendered=', rendered);
+    expect(rendered).to.equal(
       '<hr>Ohai, Jane, click <a href="/"><img>here</a> right <b><em>now <i>please</i> </em></b>'
     );
   });
+
 
   it('interpolates placeholder components', function() {
     var subject = Subject({
@@ -48,8 +62,13 @@ describe('ComponentInterpolator', function() {
       user_id: 0,
       count: <input />
     }, ["$1"]);
-    expect(removeNoise(ReactDOM.findDOMNode(subject).innerHTML)).toEqual(
+    log.debug(log.name + ': subject=', subject);
+    var rendered = removeNoise(render(subject));
+    log.log(log.name + ': rendered=', rendered);
+    expect(rendered).to.equal(
       'Hi Jane (0), create <input> new accounts'
     );
   });
 });
+
+log.log('Initialized ' + log.name);

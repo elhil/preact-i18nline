@@ -1,3 +1,12 @@
+var log;
+try {
+  // use ulog when available
+  log = require('ulog')('preact-i18nliner');
+} catch (e) {
+
+  /* satisfy eslint */
+}
+
 var preprocess = require("./preprocess");
 var recast = require("recast");
 
@@ -22,3 +31,7 @@ module.exports = function(i18nliner) {
     return fileData;
   };
 };
+
+if (log) {
+  log.log('Initialized ' + log.name);
+}

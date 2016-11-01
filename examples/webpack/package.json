@@ -6,7 +6,7 @@
     "json-loader": "^0.5.1",
     "jsx-loader": "0.13.x",
     "react": "0.13.x",
-    "react-i18nliner": "../..",
+    "preact-i18nliner": "../..",
     "webpack": "^1.9.8"
   },
   "scripts": {

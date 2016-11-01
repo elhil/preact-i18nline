@@ -1,3 +1,12 @@
+var log;
+try {
+  // use ulog when available
+  log = require('ulog')('preact-i18nliner:preprocess');
+} catch (e) {
+
+  /* satisfy eslint */
+}
+
 var recast = require('recast');
 var b = recast.types.builders;
 
@@ -365,6 +374,10 @@ function transformationsFor(config) {
 }
 
 var preprocess = function(source, config) {
+  if (log) {
+    log.debug(log.name + ': preprocessing source with config', config);
+  }
+
   config = config || {};
   var ast = recast.parse(source, config.recastOptions);
   preprocessAst(ast, config);
@@ -379,3 +392,7 @@ var preprocessAst = function(ast, config) {
 preprocess.ast = preprocessAst;
 
 module.exports = preprocess;
+
+if (log) {
+  log.log('Initialized ' + log.name);
+}

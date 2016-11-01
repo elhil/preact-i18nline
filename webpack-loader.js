@@ -1,3 +1,12 @@
+var log;
+try {
+  // use ulog when available
+  log = require('ulog')('preact-i18nliner:webpack-loader');
+} catch (e) {
+
+  /* satisfy eslint */
+}
+
 var I18nliner = require("i18nliner");
 var config = I18nliner.config;
 var preprocess = require("./preprocess");
@@ -30,3 +39,7 @@ module.exports = function(source) {
     source = preprocess(source, config);
   return source;
 };
+
+if (log) {
+  log.log('Initialized ' + log.name);
+}

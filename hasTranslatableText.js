@@ -1,3 +1,12 @@
+var log;
+try {
+  // use ulog when available
+  log = require('ulog')('preact-i18nliner:hasTranslatableText');
+} catch (e) {
+
+  /* satisfy eslint */
+}
+
 var escapeRegExp = require("./util/escapeRegExp");
 
 var getTranslatePattern = function(config) {
@@ -16,3 +25,7 @@ module.exports = function(config) {
     return !!source.match(pattern);
   };
 };
+
+if (log) {
+  log.log('Initialized ' + log.name);
+}

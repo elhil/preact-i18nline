@@ -1,7 +1,7 @@
 # webpack app
 
 This is a basic webpack app localized in a few languages, demonstrating
-the basic features of react-i18nliner.
+the basic features of preact-i18nliner.
 
 ## How do I run it?
 

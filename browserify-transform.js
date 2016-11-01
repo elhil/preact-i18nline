@@ -1,3 +1,12 @@
+var log;
+try {
+  // use ulog when available
+  log = require('ulog')('preact-i18nliner:browserify-transform');
+} catch (e) {
+
+  /* satisfy eslint */
+}
+
 var through = require("through2");
 var I18nliner = require("i18nliner");
 var config = I18nliner.config;
@@ -13,3 +22,7 @@ module.exports = function() {
     next();
   });
 };
+
+if (log) {
+  log.log('Initialized ' + log.name);
+}

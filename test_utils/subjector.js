@@ -1,16 +1,14 @@
-module.exports = function(path) {
-  jest.dontMock(path);
+var log = require('ulog')('preact-i18nliner:test:util:subjector');
 
-  var React = require('react');
-  var TestUtils = require('react-addons-test-utils');
+module.exports = function(path) {
+  var h = require('preact').h;
   var Component = require(path);
 
   return function(props, children) {
     children = children || [];
     var args = [Component, props].concat(children);
-    return TestUtils.renderIntoDocument(
-      React.createElement.apply(React, args)
-    );
+    return h.apply(null, args);
   };
 };
 
+log.log('Initialized ' + log.name);
