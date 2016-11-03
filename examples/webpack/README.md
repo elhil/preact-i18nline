@@ -1,7 +1,7 @@
 # webpack app
 
 This is a basic webpack app localized in a few languages, demonstrating
-the basic features of preact-i18nliner.
+the basic features of preact-i18nline.
 
 ## How do I run it?
 
@@ -13,7 +13,7 @@ the basic features of preact-i18nliner.
 ## What's this stuff in config/locales?
 
 Those are the localized strings; the current English strings can be
-extracted from the json file by running `i18nliner export`. The idea is
+extracted from the json file by running `i18nline export`. The idea is
 you'd send that generated json file off to your translation service,
 and incorporate the translated ones into your build.
 

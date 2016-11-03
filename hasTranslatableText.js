@@ -1,7 +1,7 @@
 var log;
 try {
   // use ulog when available
-  log = require('ulog')('preact-i18nliner:hasTranslatableText');
+  log = require('ulog')('preact-i18nline:hasTranslatableText');
 } catch (e) {
 
   /* satisfy eslint */

@@ -1,6 +1,6 @@
 module.exports = {
   entry: [
-    "./i18nliner-glue.js",
+    "./i18nline-glue.js",
     "./entry.js"
   ],
   output: {
@@ -9,7 +9,7 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, loader: "jsx-loader!react-i18nliner/webpack-loader" },
+      { test: /\.js$/, loader: "jsx-loader!react-i18nline/webpack-loader" },
       { test: /\.json$/, loader: "json-loader" }
     ]
   }

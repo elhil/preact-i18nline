@@ -1,5 +1,5 @@
 {
   "plugins": [
-    "preact-i18nliner"
+    "preact-i18nline"
   ]
 }

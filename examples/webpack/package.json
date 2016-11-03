@@ -2,15 +2,15 @@
   "dependencies": {
     "extend": "^2.0.1",
     "i18n-js": "http://github.com/fnando/i18n-js/archive/v3.0.0.rc8.tar.gz",
-    "i18nliner": "*",
+    "i18nline": "*",
     "json-loader": "^0.5.1",
     "jsx-loader": "0.13.x",
     "react": "0.13.x",
-    "preact-i18nliner": "../..",
+    "preact-i18nline": "../..",
     "webpack": "^1.9.8"
   },
   "scripts": {
     "build": "./node_modules/.bin/webpack",
-    "extract": "./node_modules/.bin/i18nliner export"
+    "extract": "./node_modules/.bin/i18nline export"
   }
 }

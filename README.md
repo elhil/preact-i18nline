@@ -1,19 +1,30 @@
-# preact-i18nliner
-#### i18n made simple - for Preact!
+# preact-i18nline
+#### Keep your translations in line - with Preact!
 
-[![npm](https://img.shields.io/npm/v/preact-i18nliner.svg)](https://npmjs.com/package/preact-i18nliner)
-[![license](https://img.shields.io/npm/l/preact-i18nliner.svg)](https://github.com/download/preact-i18nliner/LICENSE)
-[![travis](https://img.shields.io/travis/Download/preact-i18nliner.svg)](https://travis-ci.org/Download/preact-i18nliner)
-[![greenkeeper](https://img.shields.io/david/Download/preact-i18nliner.svg)](https://greenkeeper.io/)
+[![npm](https://img.shields.io/npm/v/preact-i18nline.svg)](https://npmjs.com/package/preact-i18nline)
+[![license](https://img.shields.io/npm/l/preact-i18nline.svg)](https://github.com/download/preact-i18nline/LICENSE)
+[![travis](https://img.shields.io/travis/Download/preact-i18nline.svg)](https://travis-ci.org/Download/preact-i18nline)
+[![greenkeeper](https://img.shields.io/david/Download/preact-i18nline.svg)](https://greenkeeper.io/)
 ![mind BLOWN](https://img.shields.io/badge/mind-BLOWN-ff69b4.svg)
 
+```
+  ██████╗ ██████╗ ███████╗ █████╗  ██████╗████████╗     ██╗   ███╗   ██╗██╗     ██╗███╗   ██╗███████╗
+  ██╔══██╗██╔══██╗██╔════╝██╔══██╗██╔════╝╚══██╔══╝     ██║   ████╗  ██║██║     ██║████╗  ██║██╔════╝
+  ██████╔╝██████╔╝█████╗  ███████║██║        ██║ █████╗ ██║18 ██╔██╗ ██║██║     ██║██╔██╗ ██║█████╗
+  ██╔═══╝ ██╔══██╗██╔══╝  ██╔══██║██║        ██║ ╚════╝ ██║   ██║╚██╗██║██║     ██║██║╚██╗██║██╔══╝
+  ██║     ██║  ██║███████╗██║  ██║╚██████╗   ██║        ██║   ██║ ╚████║███████╗██║██║ ╚████║███████╗
+  ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝   ╚═╝        ╚═╝   ╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝
 
-preact-i18nliner brings [I18nliner](https://github.com/jenseng/i18nliner-js)
-to [Preact](https://preactjs.com/) via the [html `translate` attribute](http://www.w3.org/International/questions/qa-translate-flag). I18n doesn't get any easier than this.
+                        KEEP YOUR TRANSLATIONS IN LINE  -  WITH PREACT!
+```
+
+preact-i18nline brings [I18nline](https://github.com/download/i18nline)
+to [Preact](https://preactjs.com/) via the html [`translate`](http://www.w3.org/International/questions/qa-translate-flag) attribute. 
+I18n doesn't get any easier than this.
 
 ## TL;DR
 
-preact-i18nliner lets you do this:
+preact-i18nline lets you do this:
 
 ```html
 <p translate="yes">
@@ -33,26 +44,26 @@ And because the default translation is inline, it will be used as a
 fallback if a translation is missing or hasn't happened yet.
 
 Best of all, you don't need to maintain separate translation files
-anymore; I18nliner will do it for you.
+anymore; I18nline will do it for you.
 
 ## What is this?
-This project is a port of [react-i18nliner](https://github.com/jenseng/react-i18nliner) by 
-[Jon Jensen](https://github.com/jenseng) to [Preact](https://preactjs.com), a 3kB alternative 
+This project is a port of [react-i18nliner](https://github.com/jenseng/react-i18nliner) by
+[Jon Jensen](https://github.com/jenseng) to [Preact](https://preactjs.com), a 3kB alternative
 to React.
 
 ## How does it work?
 
-preact-i18nliner [preprocesses](https://github.com/download/preact-i18nliner/blob/master/preprocess.js)
+preact-i18nline [preprocesses](https://github.com/download/preact-i18nline/blob/master/preprocess.js)
 your JSX, transforming it into something truly localizable. It infers
-[placeholders for expressions](https://github.com/download/preact-i18nliner/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/preprocess.test.js#L21)
-and [wrappers for elements/components](https://github.com/download/preact-i18nliner/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/preprocess.test.js#L17),
-and separates the localizable string. [At runtime](https://github.com/download/preact-i18nliner/blob/master/ComponentInterpolator.js),
-it localizes the string, interpolating the [wrappers](https://github.com/download/preact-i18nliner/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/ComponentInterpolator.test.js#L28)
-and [placeholders](https://github.com/download/preact-i18nliner/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/ComponentInterpolator.test.js#L42) into the correct locations.
+[placeholders for expressions](https://github.com/download/preact-i18nline/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/preprocess.test.js#L21)
+and [wrappers for elements/components](https://github.com/download/preact-i18nline/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/preprocess.test.js#L17),
+and separates the localizable string. [At runtime](https://github.com/download/preact-i18nline/blob/master/ComponentInterpolator.js),
+it localizes the string, interpolating the [wrappers](https://github.com/download/preact-i18nline/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/ComponentInterpolator.test.js#L28)
+and [placeholders](https://github.com/download/preact-i18nline/blob/57f813bc3ef6769be7aab47eb42fd4d081e1a498/__tests__/ComponentInterpolator.test.js#L42) into the correct locations.
 
 Localizable strings are detected both from the text nodes, as well as from [translatable attributes](http://www.w3.org/TR/html5/dom.html#the-translate-attribute) within the `translate="yes"` element.
 
-preact-i18nliner enhances I18nliner, so that it can extract any of these
+preact-i18nline enhances I18nline, so that it can extract any of these
 `translate="yes"` strings from your codebase (in addition to regular
 `I18n.t` calls). Once you get everything translated, just stick it on
 `I18n.translations` and everything will Just Work™.
@@ -121,43 +132,52 @@ within a translated element.
 
 ## Installation
 
-### 1. get i18n-js and i18nliner
-
-Get i18n-js and i18nliner installed [per these instructions](https://github.com/jenseng/i18nliner-js#installation).
-
-### 2. add preact-i18nliner
-
-```bash
-npm install preact-i18nliner --save
+```sh
+npm install -S i18n-js i18nline preact-i18nline
 ```
 
-And make sure your `.i18nrc` file has:
+## Configuration
+
+In your `package.json`, create an object named `"i18nline"` and 
+specify your project's global configuration settings there. Or, 
+if you prefer, you can create a `.i18nrc` options file in the root
+of your project.
+
+The typical configuration you'd want for a preact project would 
+look something like this:
 
 ```json
 {
   "plugins": [
-    "preact-i18nliner"
-  ]
+    "preact-i18nline"
+  ],
+  "outputFile": "my/translations/en.json"
 }
 ```
 
+Important here is that you register `preact-i18nline` as a plugin.
 This will ensure that when you export strings for translation, all of your
 new `translate="yes"` stuff will get picked up.
 
-### 3. preprocess all your js files with preact-i18nliner
+Refer to the [i18nline config docs](https://github.com/download/i18nline#configuration)
+for details on the configuration options.
+
+
+## Usage 
+Preprocess all your js and jsx files with preact-i18nline
 
 How you hook up the preprocessor will depend on how you bundle your assets:
 
 #### webpack
 
-Add [this loader](https://github.com/download/preact-i18nliner/blob/master/webpack-loader.js)
+Add [this loader](https://github.com/download/preact-i18nline/blob/master/webpack-loader.js)
 to your config, e.g.
 
 ```js
 {
   module: {
     loaders: [
-      { test: /\.js$/, loader: "preact-i18nliner/webpack-loader" }
+      { test: /\.js$/, loader: "preact-i18nline/webpack-loader" }
       ...
     ],
   },
@@ -166,16 +186,16 @@ to your config, e.g.
 ```
 
 **TODO: example not ported over yet**
-Check out [this example app](https://github.com/download/preact-i18nliner/tree/master/examples/webpack)
+Check out [this example app](https://github.com/download/preact-i18nline/tree/master/examples/webpack)
 to see how everything is wired together.
 
 #### browserify
 
-Use [this transform](https://github.com/download/preact-i18nliner/blob/master/browserify-transform.js),
+Use [this transform](https://github.com/download/preact-i18nline/blob/master/browserify-transform.js),
 e.g.
 
 ```bash
-$ browserify -t preact-i18nliner/browserify-transform app.js > bundle.js
+$ browserify -t preact-i18nline/browserify-transform app.js > bundle.js
 ```
 
 #### something else?
@@ -186,24 +206,24 @@ you use ember-cli, sprockets, grunt concat, etc., it's relatively
 painless to add a little glue code that runs preprocess on each
 source file.
 
-### 4. add the preact-i18nliner runtime extensions to i18n-js
+### 4. add the preact-i18nline runtime extensions to i18n-js
 
 Assuming you have a cjs-style app, do something like this:
 
 ```js
 var I18n = require("./path/to/cjs'd/i18n");
-require("i18nliner/dist/lib/extensions/i18n_js")(I18n);
-require("preact-i18nliner/dist/extensions/i18n_js")(I18n);
+require("i18nline/dist/lib/extensions/i18n_js")(I18n);
+require("preact-i18nline/dist/extensions/i18n_js")(I18n);
 ```
 
-If you're using AMD/`<script>`/something else, see the [i18nliner-js README](https://github.com/jenseng/i18nliner-js#installation)
+If you're using AMD/`<script>`/something else, see the [i18nline-js README](https://github.com/jenseng/i18nline-js#installation)
 for hints; these extensions can be set up exactly the same way as
-i18nliner-js's.
+i18nline-js's.
 
 ## Working with translations
 
-Since preact-i18nliner is just an i18nliner plugin, you can use the
-i18nliner bin / grunt task to extract translations from your codebase;
+Since preact-i18nline is just an i18nline plugin, you can use the
+i18nline bin / grunt task to extract translations from your codebase;
 it will pick up normal `I18n.t` usage, as well as your new
 `translate="yes"` components.
 
@@ -270,7 +290,7 @@ for them.
 
 ### What about pluralization? Or gender?
 
-i18nliner does support basic pluralization (via i18n-js), but you need
+i18nline does support basic pluralization (via i18n-js), but you need
 to use pure js for that, e.g.
 
 ```html
@@ -280,7 +300,7 @@ to use pure js for that, e.g.
 ```
 
 i18n-js doesn't support gender-based localizations, but I do plan on
-making i18nliner work with other backends soon (e.g. i18next, FormatJS).
+making i18nline work with other backends soon (e.g. i18next, FormatJS).
 Watch this space, or better yet, create a pull request ;)
 
 ### Every JSX expression makes a placeholder
@@ -304,21 +324,22 @@ return (this.props.isAuthorized ?
          <b translate="yes">You are NOT authorized</b>);
 ```
 
-**NOTE:** in a subsequent release of preact-i18nliner, the former example
-will cause an `i18nliner:check` failure. You've been warned :)
+**NOTE:** in a subsequent release of preact-i18nline, the former example
+will cause an `i18nline:check` failure. You've been warned :)
 
 ### Cloning this project under Windows
 
-This project's eslint settings force a check on the use of linefeed characters 
-that will fail when the project is cloned with the git 
-[core.autocrlf](https://git-scm.com/book/tr/v2/Customizing-Git-Git-Configuration) 
-setting set to `true`, which is the default on Windows. So make sure to change 
+This project's eslint settings force a check on the use of linefeed characters
+that will fail when the project is cloned with the git
+[core.autocrlf](https://git-scm.com/book/tr/v2/Customizing-Git-Git-Configuration)
+setting set to `true`, which is the default on Windows. So make sure to change
 that setting beforehand. The easiest way to do this is probably to `git init` a new
 repo for this project and change the setting, and only then add this repo as a
 remote and pull from it.
 
 ## Related Projects
 
+* [i18nline](https://github.com/download/i18nline)
 * [react-i18nliner](https://github.com/jenseng/react-i18nliner)
 * [i18nliner (ruby)](https://github.com/jenseng/i18nliner)
 * [i18nliner-js](https://github.com/jenseng/i18nliner-js)

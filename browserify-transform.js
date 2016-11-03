@@ -1,15 +1,16 @@
 var log;
 try {
   // use ulog when available
-  log = require('ulog')('preact-i18nliner:browserify-transform');
+  log = require('ulog')('preact-i18nline:browserify-transform');
 } catch (e) {
 
   /* satisfy eslint */
 }
 
 var through = require("through2");
-var I18nliner = require("i18nliner");
-var config = I18nliner.config;
+var I18nline = require("i18nline");
+
+var config = I18nline.config;
 var preprocess = require("./preprocess");
 var hasTranslatableText = require("./hasTranslatableText")(config);
 

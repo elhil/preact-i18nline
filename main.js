@@ -1,18 +1,19 @@
 var log;
 try {
   // use ulog when available
-  log = require('ulog')('preact-i18nliner');
+  log = require('ulog')('preact-i18nline');
 } catch (e) {
 
   /* satisfy eslint */
 }
 
-var preprocess = require("./preprocess");
 var recast = require("recast");
 
-module.exports = function(i18nliner) {
-  var JsProcessor = i18nliner.processors.JsProcessor;
-  var config = i18nliner.config;
+var preprocess = require("./preprocess");
+
+module.exports = function(i18nline) {
+  var JsProcessor = i18nline.processors.JsProcessor;
+  var config = i18nline.config;
   var origPreProcess = JsProcessor.prototype.preProcess;
   var hasTranslatableText = require("./hasTranslatableText")(config);
 

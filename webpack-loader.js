@@ -1,24 +1,25 @@
 var log;
 try {
   // use ulog when available
-  log = require('ulog')('preact-i18nliner:webpack-loader');
+  log = require('ulog')('preact-i18nline:webpack-loader');
 } catch (e) {
 
   /* satisfy eslint */
 }
 
-var I18nliner = require("i18nliner");
-var config = I18nliner.config;
+var I18nline = require("i18nline");
+
+var config = I18nline.config;
 var preprocess = require("./preprocess");
 var hasTranslatableText = require("./hasTranslatableText")(config);
 
 /*
  * there's code in this file that dynamically requires plugins; it's
  * not needed in the browser, so we skip it ... otherwise webpack
- * will load *all* of i18nliner (which includes things like fs, and
+ * will load *all* of i18nline (which includes things like fs, and
  * will fail).
  */
-var noParsePath = "i18nliner/dist/lib/i18nliner";
+var noParsePath = "i18nline/dist/lib/i18nline";
 var addNoParse = function() {
   var escapeRegExp = require("./util/escapeRegExp");
   var path = require("path");

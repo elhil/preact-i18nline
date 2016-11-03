@@ -11,7 +11,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var log;
 try {
   // use ulog when available
-  log = require('ulog')('preact-i18nliner:ComponentInterpolator');
+  log = require('ulog')('preact-i18nline:ComponentInterpolator');
 } catch (e) {
 
   /* satisfy eslint */

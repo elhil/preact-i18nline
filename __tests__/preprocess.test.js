@@ -1,4 +1,4 @@
-var log = require('ulog')('preact-i18nliner:test:preprocess');
+var log = require('ulog')('preact-i18nline:test:preprocess');
 
 var expect = require('chai').expect;
 
