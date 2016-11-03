@@ -1,4 +1,4 @@
-var log = require('ulog')('preact-i18nline:test:preprocess');
+var log = require('../util/createLogger')('preact-i18nline:test:preprocess');
 
 var expect = require('chai').expect;
 
@@ -88,6 +88,11 @@ describe('preprocess', function() {
   it('auto-translates autoTranslateTags', function() {
     expect(subject('<h1>Hello World</h1>', {autoTranslateTags: ['h1']}))
           .to.equal('<h1>{I18n.t("Hello World")}</h1>');
+  });
+
+  it('can handle missing autoTranslateTags', function() {
+    expect(subject('<h1>Hello World</h1>', {}))
+          .to.equal('<h1>Hello World</h1>');
   });
 
   it('doesn\'t translate autoTranslateTags with translate="no"', function() {

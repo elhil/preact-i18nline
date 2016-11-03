@@ -1,11 +1,4 @@
-var log;
-try {
-  // use ulog when available
-  log = require('ulog')('preact-i18nline:webpack-loader');
-} catch (e) {
-
-  /* satisfy eslint */
-}
+var log = require('./util/createLogger')('preact-i18nline:webpack-loader');
 
 var I18nline = require("i18nline");
 
@@ -41,6 +34,4 @@ module.exports = function(source) {
   return source;
 };
 
-if (log) {
-  log.log('Initialized ' + log.name);
-}
+log.log('Initialized ' + log.name);

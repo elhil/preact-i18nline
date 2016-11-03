@@ -1,11 +1,4 @@
-var log;
-try {
-  // use ulog when available
-  log = require('ulog')('preact-i18nline:hasTranslatableText');
-} catch (e) {
-
-  /* satisfy eslint */
-}
+var log = require('./util/createLogger')('preact-i18nline:hasTranslatableText');
 
 var escapeRegExp = require("./util/escapeRegExp");
 
@@ -26,6 +19,4 @@ module.exports = function(config) {
   };
 };
 
-if (log) {
-  log.log('Initialized ' + log.name);
-}
+log.log('Initialized ' + log.name);

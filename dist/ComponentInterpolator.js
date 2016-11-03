@@ -8,14 +8,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var log;
-try {
-  // use ulog when available
-  log = require('ulog')('preact-i18nline:ComponentInterpolator');
-} catch (e) {
-
-  /* satisfy eslint */
-}
+var log = require('./util/createLogger')('preact-i18nline:ComponentInterpolator');
 
 var invariant = require('invariant');
 var Component = require('preact').Component;
@@ -27,9 +20,7 @@ var PLACEHOLDER_PATTERN = /(%\{.*?\})/;
 
 // Replace a "$1" text descendant in this tree with the newDescendants
 var injectNewDescendants = function injectNewDescendants(element, newDescendants, props, ensureInjected) {
-  if (log) {
-    log.debug(log.name + ': injectNewDescendants', element, newDescendants, props);
-  }
+  log.debug(log.name + ': injectNewDescendants', element, newDescendants, props);
 
   newDescendants.injectedCount = newDescendants.injectedCount || 0;
   props = props || {};
@@ -54,9 +45,7 @@ var injectNewDescendants = function injectNewDescendants(element, newDescendants
 };
 
 var getInjectIndex = function getInjectIndex(children, containerName) {
-  if (log) {
-    log.debug(log.name + ': getInjectIndex', children, containerName);
-  }
+  log.debug(log.name + ': getInjectIndex', children, containerName);
   var child,
       index = -1;
   for (var i = 0; i < children.length; i++) {
@@ -81,9 +70,7 @@ var ComponentInterpolator = function (_Component) {
   _createClass(ComponentInterpolator, [{
     key: 'inferChildren',
     value: function inferChildren() {
-      if (log) {
-        log.debug(log.name + ': inferChildren');
-      }
+      log.debug(log.name + ': inferChildren');
 
       var tokens = (this.props.string || '').split(WRAPPER_PATTERN);
       this.keyCounter = 0;
@@ -99,9 +86,8 @@ var ComponentInterpolator = function (_Component) {
   }, {
     key: 'interpolateAllComponents',
     value: function interpolateAllComponents(tokens, eof) {
-      if (log) {
-        log.debug(log.name + ': interpolateAllComponents', tokens, eof);
-      }
+      log.debug(log.name + ': interpolateAllComponents', tokens, eof);
+
       var token, child;
       var children = [];
       var wrappers = this.props.wrappers || {};
@@ -122,9 +108,8 @@ var ComponentInterpolator = function (_Component) {
   }, {
     key: 'interpolatePlaceholders',
     value: function interpolatePlaceholders(string) {
-      if (log) {
-        log.debug(log.name + ': interpolatePlaceholders', string, this.props);
-      }
+      log.debug(log.name + ': interpolatePlaceholders', string, this.props);
+
       var token, child;
       var tokens = string.split(PLACEHOLDER_PATTERN);
       var children = [];
@@ -154,6 +139,4 @@ var ComponentInterpolator = function (_Component) {
 
 module.exports = ComponentInterpolator;
 
-if (log) {
-  log.log('Initialized ' + log.name);
-}
+log.log('Initialized ' + log.name);

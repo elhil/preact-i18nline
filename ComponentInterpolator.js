@@ -1,11 +1,4 @@
-var log;
-try {
-  // use ulog when available
-  log = require('ulog')('preact-i18nline:ComponentInterpolator');
-} catch (e) {
-
-  /* satisfy eslint */
-}
+var log = require('./util/createLogger')('preact-i18nline:ComponentInterpolator');
 
 var invariant = require('invariant');
 var Component = require('preact').Component;
@@ -17,9 +10,7 @@ var PLACEHOLDER_PATTERN = /(%\{.*?\})/;
 
 // Replace a "$1" text descendant in this tree with the newDescendants
 var injectNewDescendants = function(element, newDescendants, props, ensureInjected) {
-  if (log) {
-    log.debug(log.name + ': injectNewDescendants', element, newDescendants, props);
-  }
+  log.debug(log.name + ': injectNewDescendants', element, newDescendants, props);
 
   newDescendants.injectedCount = newDescendants.injectedCount || 0;
   props = props || {};
@@ -44,9 +35,7 @@ var injectNewDescendants = function(element, newDescendants, props, ensureInject
 };
 
 var getInjectIndex = function(children, containerName) {
-  if (log) {
-    log.debug(log.name + ': getInjectIndex', children, containerName);
-  }
+  log.debug(log.name + ': getInjectIndex', children, containerName);
   var child, index = -1;
   for (var i = 0; i < children.length; i++) {
     child = children[i];
@@ -60,9 +49,7 @@ var getInjectIndex = function(children, containerName) {
 
 class ComponentInterpolator extends Component {
   inferChildren() {
-    if (log) {
-      log.debug(log.name + ': inferChildren');
-    }
+    log.debug(log.name + ': inferChildren');
 
     var tokens = (this.props.string || '').split(WRAPPER_PATTERN);
     this.keyCounter = 0;
@@ -77,9 +64,8 @@ class ComponentInterpolator extends Component {
   }
 
   interpolateAllComponents(tokens, eof) {
-    if (log) {
-      log.debug(log.name + ': interpolateAllComponents', tokens, eof);
-    }
+    log.debug(log.name + ': interpolateAllComponents', tokens, eof);
+
     var token, child;
     var children = [];
     var wrappers = this.props.wrappers || {};
@@ -108,9 +94,8 @@ class ComponentInterpolator extends Component {
   }
 
   interpolatePlaceholders(string) {
-    if (log) {
-      log.debug(log.name + ': interpolatePlaceholders', string, this.props);
-    }
+    log.debug(log.name + ': interpolatePlaceholders', string, this.props);
+
     var token, child;
     var tokens = string.split(PLACEHOLDER_PATTERN);
     var children = [];
@@ -139,6 +124,4 @@ class ComponentInterpolator extends Component {
 
 module.exports = ComponentInterpolator;
 
-if (log) {
-  log.log('Initialized ' + log.name);
-}
+log.log('Initialized ' + log.name);

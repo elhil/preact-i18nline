@@ -1,11 +1,4 @@
-var log;
-try {
-  // use ulog when available
-  log = require('ulog')('preact-i18nline:browserify-transform');
-} catch (e) {
-
-  /* satisfy eslint */
-}
+var log = require('./util/createLogger')('preact-i18nline:browserify-transform');
 
 var through = require("through2");
 var I18nline = require("i18nline");
@@ -24,6 +17,4 @@ module.exports = function() {
   });
 };
 
-if (log) {
-  log.log('Initialized ' + log.name);
-}
+log.log('Initialized ' + log.name);

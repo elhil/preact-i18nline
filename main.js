@@ -1,11 +1,4 @@
-var log;
-try {
-  // use ulog when available
-  log = require('ulog')('preact-i18nline');
-} catch (e) {
-
-  /* satisfy eslint */
-}
+var log = require('./util/createLogger')('preact-i18nline');
 
 var recast = require("recast");
 
@@ -33,6 +26,4 @@ module.exports = function(i18nline) {
   };
 };
 
-if (log) {
-  log.log('Initialized ' + log.name);
-}
+log.log('Initialized ' + log.name);

@@ -1,4 +1,4 @@
-var log = require('ulog')('preact-i18nline:test:ComponentInterpolator');
+var log = require('../util/createLogger')('preact-i18nline:test:ComponentInterpolator');
 
 var expect = require('chai').expect;
 var subjector = require('../test_utils/subjector');

@@ -245,14 +245,22 @@ I18n.translations = {
 }
 ```
 
-## Configuration / Advanced Settings
+## Configuration
 
-If you have certain tags that you always want to translate (e.g. `<h1>`),
-you can specify them in your `.i18nrc` via `autoTranslateTags`, e.g.
+In addition to the [i18nline configuration](https://github.com/download/i18nline#configuration),
+preact-i18nline adds some options specific to JSX processing:
 
-```js
+### autoTranslateTags
+An array of strings, or a string with (a comma separated list of) 
+tag names that should be translated automatically. Defaults to `[]`.
+
+#### example
+*package.json*
+```json
 {
-  "autoTranslateTags": ["h1", "h2", "h3", "h4", "h5", "h6", "p"]
+  "i18n": {
+    "autoTranslateTags": ["h1", "h2", "h3", "h4", "h5", "h6", "p"]
+  }
 }
 ```
 
@@ -273,18 +281,29 @@ class T extends Component {
 }
 ```
 
-Similarly, if you have certain tags you **don't** want to auto-translate
-(e.g. `<code>`), you can specify those in a similar manner:
+### neverTranslateTags
+An array of strings, or a string with (a comma separated list of) 
+tag names that should **not** be translated automatically. 
+Defaults to `[]`.
 
-```js
+Similarly to `autoTranslateTags`, if you have certain tags you 
+**don't** want to translate automatically, (e.g. `<code>`), 
+you can specify those in a similar manner.
+
+#### example
+*package.json*
+```json
 {
-  "neverTranslateTags": ["code"],
+  "i18n": {
+    "neverTranslateTags": ["code"],
+  }
 }
 ```
 
-Then if those are ever nested in a larger translatable element, they
+If those are ever nested in a larger translatable element, they
 will be assumed to be untranslatable, and a placeholder will be created
-for them.
+for them. 
+
 
 ## Gotchas
 
@@ -299,18 +318,17 @@ to use pure js for that, e.g.
 </div>
 ```
 
-i18n-js doesn't support gender-based localizations, but I do plan on
-making i18nline work with other backends soon (e.g. i18next, FormatJS).
-Watch this space, or better yet, create a pull request ;)
-
 ### Every JSX expression makes a placeholder
 
-This kind of gets to a general rule of i18n: don't concatenate strings. For example,
+This kind of gets to a general rule of i18n: don't concatenate strings. 
+For example,
 
 ```js
-return (<b translate="yes">
-         You are {this.props.isAuthorized ? "authorized" : "NOT authorized"}
-        </b>);
+return (
+  <b translate="yes">
+    You are {this.props.isAuthorized ? "authorized" : "NOT authorized"}
+  </b>
+);
 ```
 
 The extracted string will be `"You are %{opaque_placeholder}"` and the
@@ -324,8 +342,9 @@ return (this.props.isAuthorized ?
          <b translate="yes">You are NOT authorized</b>);
 ```
 
-**NOTE:** in a subsequent release of preact-i18nline, the former example
-will cause an `i18nline:check` failure. You've been warned :)
+**NOTE:** A subsequent release of preact-i18nline may add a check for
+this situation that will cause an `i18nline:check` failure. 
+You've been warned :)
 
 ### Cloning this project under Windows
 

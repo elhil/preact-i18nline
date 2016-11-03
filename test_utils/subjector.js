@@ -1,4 +1,4 @@
-var log = require('ulog')('preact-i18nline:test:util:subjector');
+var log = require('../util/createLogger')('preact-i18nline:test:util:subjector');
 
 module.exports = function(path) {
   var h = require('preact').h;

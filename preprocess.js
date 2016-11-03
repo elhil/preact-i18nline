@@ -1,11 +1,4 @@
-var log;
-try {
-  // use ulog when available
-  log = require('ulog')('preact-i18nline:preprocess');
-} catch (e) {
-
-  /* satisfy eslint */
-}
+var log = require('./util/createLogger')('preact-i18nline:preprocess');
 
 var recast = require('recast');
 var b = recast.types.builders;
@@ -61,9 +54,8 @@ var hasLiteralContent = function(node) {
 };
 
 var hasNonJSXDescendants = function(node) {
-  if (log) {
-    log.debug(log.name + ': hasNonJSXDescendants', node);
-  }
+  log.debug(log.name + ': hasNonJSXDescendants', node);
+
   switch (node.type){
     case "JSXElement":
       return node.children && node.children.some(hasNonJSXDescendants);
@@ -89,18 +81,15 @@ var findNestedJSXExpressions = function(node, expressions) {
 };
 
 var findAttributeIndex = function(name, array) {
-  if (log) {
-    log.debug(log.name + ': findAttributeIndex', name, array);
-  }
+  log.debug(log.name + ': findAttributeIndex', name, array);
+
   return findIndex(function(attribute) {
     return attribute.name && attribute.name.name === name;
   }, array);
 };
 
 var findAttribute = function(attribute, node, shouldSpliceFn) {
-  if (log) {
-    log.debug(log.name + ': findAttribute', attribute, node, shouldSpliceFn);
-  }
+  log.debug(log.name + ': findAttribute', attribute, node, shouldSpliceFn);
 
   if (node.type !== "JSXElement" && node.type !== "JSXOpeningElement") return;
 
@@ -126,10 +115,6 @@ var findKeyAttribute = findAttribute.bind(null, "key");
 
 
 function transformationsFor(config) {
-  config = config || {};
-  config.autoTranslateTags = config.autoTranslateTags || [];
-  config.neverTranslateTags = config.neverTranslateTags || [];
-
   var isTranslating = false;
 
   var setIsTranslating = function(newValue, fn) {
@@ -166,9 +151,7 @@ function transformationsFor(config) {
   };
 
   var componentInterpolatorFor = function(string, wrappers, placeholders, children, loc) {
-    if (log) {
-      log.debug(log.name + ': componentInterpolatorFor', string, wrappers, placeholders, children, loc);
-    }
+    log.debug(log.name + ': componentInterpolatorFor', string, wrappers, placeholders, children, loc);
 
     var properties = [];
     var key;
@@ -308,9 +291,7 @@ function transformationsFor(config) {
   };
 
   var translateStringFor = function(node, wrappers, placeholders, newChildren) {
-    if (log) {
-      log.debug(log.name + ': translateStringFor', node, wrappers, placeholders, newChildren);
-    }
+    log.debug(log.name + ': translateStringFor', node, wrappers, placeholders, newChildren);
 
     var string = "";
     var standalones = newChildren;
@@ -355,9 +336,7 @@ function transformationsFor(config) {
   };
 
   var translateExpressionFor = function(node) {
-    if (log) {
-      log.debug(log.name + ': translateExpressionFor', node);
-    }
+    log.debug(log.name + ': translateExpressionFor', node);
 
     var wrappers = {};
     var placeholders = {};
@@ -374,9 +353,7 @@ function transformationsFor(config) {
 
   return {
     visitJSXElement: function(path) {
-      if (log) {
-        log.debug(log.name + ': visitJSXElement', path);
-      }
+      log.debug(log.name + ': visitJSXElement', path);
 
       var node = path.value;
       var shouldTranslate = isTranslatable(node) && !isTranslating;
@@ -404,11 +381,12 @@ function transformationsFor(config) {
 }
 
 var preprocess = function(source, config) {
-  if (log) {
-    log.debug(log.name + ': preprocessing source with config', config);
-  }
+  log.debug(log.name + ': preprocessing source with config', config);
 
   config = config || {};
+  config.autoTranslateTags = typeof config.autoTranslateTags === 'string' ? config.autoTranslateTags.split(',') : config.autoTranslateTags || [];
+  config.neverTranslateTags = typeof config.neverTranslateTags === 'string' ? config.neverTranslateTags.split(',') : config.neverTranslateTags || [];
+
   var ast = recast.parse(source, config.recastOptions);
   preprocessAst(ast, config);
   return recast.print(ast).code;
@@ -423,6 +401,4 @@ preprocess.ast = preprocessAst;
 
 module.exports = preprocess;
 
-if (log) {
-  log.log('Initialized ' + log.name);
-}
+log.log('Initialized ' + log.name);
