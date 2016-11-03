@@ -13,6 +13,10 @@ var getTranslatePattern = function(config) {
 module.exports = function(config) {
   var pattern;
 
+  config = config || {};
+  config.autoTranslateTags = typeof config.autoTranslateTags === 'string' ? config.autoTranslateTags.split(',') : config.autoTranslateTags || [];
+  config.neverTranslateTags = typeof config.neverTranslateTags === 'string' ? config.neverTranslateTags.split(',') : config.neverTranslateTags || [];
+
   return function(source) {
     pattern = pattern || getTranslatePattern(config);
     return !!source.match(pattern);
