@@ -1,3 +1,5 @@
+var extend = require('extend');
+
 /* eslint-disable */
 module.exports = function(name) {
 	var log = {name: name};
@@ -5,10 +7,7 @@ module.exports = function(name) {
 		log = require('ulog')(log.name);
 	} catch (e) {
 		function nop(){} 
-		log = Object.assign(log, console, {
-			debug:nop, 
-			log:nop
-		});
+		log = extend(log, console, {trace:nop, debug:nop, log:nop});
 	}
 	return log;
 }
