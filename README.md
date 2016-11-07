@@ -15,7 +15,7 @@
   ██║     ██║  ██║███████╗██║  ██║╚██████╗   ██║        ██║   ██║ ╚████║███████╗██║██║ ╚████║███████╗
   ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝ ╚═════╝   ╚═╝        ╚═╝   ╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═══╝╚══════╝
 
-                        KEEP YOUR TRANSLATIONS IN LINE  -  WITH PREACT!
+                        keep your translations in line  -  with preact!
 ```
 
 preact-i18nline brings [I18nline](https://github.com/download/i18nline)
@@ -133,12 +133,12 @@ within a translated element.
 ## Installation
 
 ```sh
-npm install -S i18n-js i18nline preact-i18nline
+npm install -S i18nline preact-i18nline
 ```
 
 ## Configuration
 
-In your `package.json`, create an object named `"i18nline"` and 
+In your `package.json`, create an object named `"i18n"` and 
 specify your project's global configuration settings there. Or, 
 if you prefer, you can create a `.i18nrc` options file in the root
 of your project.
@@ -206,37 +206,63 @@ you use ember-cli, sprockets, grunt concat, etc., it's relatively
 painless to add a little glue code that runs preprocess on each
 source file.
 
-### 4. add the preact-i18nline runtime extensions to i18n-js
+## Add the preact-i18nline runtime extensions to i18n
 
-Assuming you have a cjs-style app, do something like this:
+Both i18nline and preact-i18nline add some extensions to i18n.js to 
+help with the runtime processing of the translations. You can require
+I18n via preact-i18nline to get a `I18n` object that has all extensions
+applied already:
 
 ```js
-var I18n = require("./path/to/cjs'd/i18n");
-require("i18nline/dist/lib/extensions/i18n_js")(I18n);
-require("preact-i18nline/dist/extensions/i18n_js")(I18n);
+var I18n = require("preact-i18nline/i18n");
 ```
 
-If you're using AMD/`<script>`/something else, see the [i18nline-js README](https://github.com/jenseng/i18nline-js#installation)
-for hints; these extensions can be set up exactly the same way as
-i18nline-js's.
+Alternatively, you can apply the extensions manually:
+
+```js
+var I18n = // get it from somewhere, script tag, whatever
+require('i18nline/lib/extensions/i18n_js')(I18n);
+require('preact-i18nline/dist/extensions/i18n_js')(I18n);
+```
 
 ## Working with translations
 
-Since preact-i18nline is just an i18nline plugin, you can use the
-i18nline bin / grunt task to extract translations from your codebase;
-it will pick up normal `I18n.t` usage, as well as your new
-`translate="yes"` components.
+Since preact-i18nline is just an i18nline plugin, you can use the i18nline 
+CLI to extract translations from your codebase; it will pick up normal 
+`I18n.t` usage, as well as your new `translate="yes"` components. The 
+easiest way to do this is to add a `"scripts"` section to your package.json
+and call i18nline from there:
+
+*package.json*
+```json
+{
+  "i18n": {
+    "plugins": {
+      "preact-i18nline"
+    }
+  },
+  "scripts": {
+    "translations": "i18nline export"
+  }
+}
+```
+
+Then you can simply invoke it via NPM as usual:
+
+```sh
+$ npm run translations
+```
 
 Once you've gotten all your translations back from the translators,
-simply stick them the giant blob 'o json on `I18n.translations`; it
-expects the translations to be of the format:
+simply stick them on `I18n.translations`; it expects the translations 
+to be of the format:
 
 ```js
 I18n.translations = {
   "en": {
     "some_key": "Hello World",
     "another_key": "What's up?"
-  }
+  },
   "es": {
     "some_key": "Hola mundo",
     "another_key": "¿Qué tal?"
@@ -247,7 +273,8 @@ I18n.translations = {
 
 ## Configuration
 
-In addition to the [i18nline configuration](https://github.com/download/i18nline#configuration),
+In addition to the 
+[i18nline configuration](https://github.com/download/i18nline#configuration),
 preact-i18nline adds some options specific to JSX processing:
 
 ### autoTranslateTags
