@@ -50,13 +50,13 @@
     "ulog": "^1.0.0"
   },
   "peerDependencies": {
-    "preact": "^6.0.0"
+    "preact": "^8.0.0"
   },
   "dependencies": {
     "extend": "^3.0.0",
     "i18nline": "^1.5.0",
     "invariant": "2.2.2",
-    "preact": "^6.4.0",
+    "preact": "^8.1.0",
     "recast": "^0.10.0",
     "through2": "^2.0.1"
   }
